@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,7 +16,6 @@ public class ClickerActivity extends AppCompatActivity {
     private TextView p2_click_view;
     private Button p1_button;
     private Button p2_button;
-    private TextView timer_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +25,6 @@ public class ClickerActivity extends AppCompatActivity {
         p2_click_view = findViewById(R.id.p2_clicks);
         p1_button = findViewById(R.id.p1_button);
         p2_button = findViewById(R.id.p2_button);
-        timer_text = findViewById(R.id.timer);
         p1_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,33 +39,24 @@ public class ClickerActivity extends AppCompatActivity {
                 updateP2Points();
             }
         });
-        //add countdown timer for 10 seconds
-        //once timer ends, stop incrementing points for clicks and check for winner:
-        new CountDownTimer(30000, 1000) {
-
-            public void onTick(long millisUntilFinished) {
-                timer_text.setText("seconds remaining: " + millisUntilFinished / 1000);
-            }
-
-            public void onFinish() {
-                timer_text.setText("done!");
-            }
-        }.start();
-        if (winner()) {
-            Toast.makeText(this, "Player 1 wins", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        } else {
-            Toast.makeText(this, "Player 2 wins", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }
+        //after countdown timer ends:
+        /**
+         if (winner()) {
+         Toast.makeText(this, "Player 1 wins", Toast.LENGTH_SHORT).show();
+         Intent intent = new Intent(this, MainActivity.class);
+         startActivity(intent);
+         } else {
+         Toast.makeText(this, "Player 2 wins", Toast.LENGTH_SHORT).show();
+         Intent intent = new Intent(this, MainActivity.class);
+         startActivity(intent);
+         }
+         */
     }
     private void updateP1Points() {
-        p1_click_view.setText(p1_points);
+        p1_click_view.setText("" + p1_points);
     }
     private void updateP2Points() {
-        p2_click_view.setText(p2_points);
+        p2_click_view.setText("" + p2_points);
     }
     private boolean winner() {
         if (p1_points > p2_points) {
