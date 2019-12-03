@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toClicker();
     }
 
-    private boolean checkBoardWin() {
+    private String checkBoardWin() {
         String[][] board = new String[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -61,27 +61,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (board[i][0].equals(board[i][1])
                 && board[i][0].equals(board[i][2])
                 && !board[i][0].equals("")) {
-                return true;
+                return board[i][0];
             }
         }
         for (int i = 0; i < 3; i++) {
             if (board[0][i].equals(board[1][i])
                     && board[0][i].equals(board[2][i])
                     && !board[0][i].equals("")) {
-                return true;
+                return board[0][i];
             }
         }
         if (board[0][0].equals(board[1][1])
                 && board[0][0].equals(board[2][2])
                 && !board[0][0].equals("")) {
-            return true;
+            return board[0][0];
         }
         if (board[0][2].equals(board[1][1])
                 && board[0][2].equals(board[2][0])
                 && !board[0][2].equals("")) {
-            return true;
+            return board[0][2];
         }
-        return false;
+        return "-";
     }
     private void player1Win() {
         player1Points++;

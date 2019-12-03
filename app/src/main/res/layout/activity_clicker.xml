@@ -6,53 +6,97 @@
     android:layout_height="match_parent"
     tools:context=".ClickerActivity">
 
+    <Button
+        android:id="@+id/p1_button"
+        android:layout_width="313dp"
+        android:layout_height="227dp"
+        android:layout_gravity="center"
+        android:text="Player 1"
+        app:layout_constraintBottom_toTopOf="@+id/p2_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timer" />
+
     <TextView
         android:id="@+id/player1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:freezesText="true"
-        android:text="Player 1: 0"
+        android:text="Player 1"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/p1_button"
+        app:layout_constraintBottom_toTopOf="@+id/p1_clicks"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.236"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.192" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/player2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/player1"
+        android:layout_gravity="center"
         android:freezesText="true"
-        android:text="Player 2: 0"
+        android:text="Player 2"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/p1_button"
+        app:layout_constraintBottom_toTopOf="@+id/p2_clicks"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.753"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player1"
-        app:layout_constraintVertical_bias="0.25" />
-
-    <Button
-        android:id="@+id/p1_button"
-        android:layout_width="313dp"
-        android:layout_height="227dp"
-        android:layout_marginTop="156dp"
-        android:text="Player 1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/p2_button"
         android:layout_width="313dp"
         android:layout_height="227dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="36dp"
         android:text="Player 2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/p1_clicks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.299"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.892" />
+        app:layout_constraintVertical_bias="0.082" />
+
+    <TextView
+        android:id="@+id/p2_clicks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.703"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.082" />
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="119dp"
+        android:layout_height="48dp"
+        android:text="10:00"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/p2_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.541"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.307" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
