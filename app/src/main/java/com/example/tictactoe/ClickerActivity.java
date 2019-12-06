@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -51,13 +52,18 @@ public class ClickerActivity extends AppCompatActivity {
          startActivity(intent);
          }
          */
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("winner", true);
+        startActivity(intent);
     }
     private void updateP1Points() {
         p1_click_view.setText("" + p1_points);
     }
+
     private void updateP2Points() {
         p2_click_view.setText("" + p2_points);
     }
+
     private boolean winner() {
         if (p1_points > p2_points) {
             return true;

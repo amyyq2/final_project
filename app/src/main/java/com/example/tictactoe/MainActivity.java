@@ -13,11 +13,12 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button[][] buttons = new Button[3][3];
+    private  Button[][] buttons = new Button[3][3];
     private int player1Points;
     private int player2Points;
     private TextView player1;
     private TextView player2;
+    private int turns;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        toClicker();
+        if (((Button) view).getText().toString().equals("")) {
+            toClicker();
+            boolean winner = getIntent().getBooleanExtra("winner", false);
+            if (winner) {
+                ((Button) view).setText("X");
+            } else {
+                ((Button) view).setText("O");
+            }
+            /*turns++;
+            if (checkBoardWin().equals("X")) {
+                player1Win();
+            } else if (checkBoardWin().equals("O")) {
+                player2Win();
+            } else if (checkBoardWin().equals("draw")) {
+                draw();
+            }*/
+        }
     }
 
     private String checkBoardWin() {
@@ -80,6 +97,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 && board[0][2].equals(board[2][0])
                 && !board[0][2].equals("")) {
             return board[0][2];
+        }
+        if (turns == 9) {
+            return "draw";
         }
         return "-";
     }
