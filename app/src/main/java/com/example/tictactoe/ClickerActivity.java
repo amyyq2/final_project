@@ -20,6 +20,7 @@ public class ClickerActivity extends AppCompatActivity {
     private TextView timer;
     private CountDownTimer countDownTimer;
     private int timeLeftInMilliseconds = 7500; // 7.5 Seconds
+    private boolean win;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,18 +61,10 @@ public class ClickerActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 timer.setText("0:00");
-                //after countdown timer ends:
-                /*
-                 if (winner()) {
-                 //Toast.makeText("Player 1 wins", Toast.LENGTH_SHORT).show();
-                 Intent intent = new Intent(this, MainActivity.class);
-                 startActivity(intent);
-                 } else {
-                 //Toast.makeText(this, "Player 2 wins", Toast.LENGTH_SHORT).show();
-                 Intent intent = new Intent(this, MainActivity.class);
-                 startActivity(intent);
-                 }
-                 */
+                Intent intent = new Intent();
+                intent.putExtra("winner", winner());
+                setResult(RESULT_OK, intent);
+                finish();
             }
         }.start();
     }

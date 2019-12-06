@@ -19,6 +19,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView player1;
     private TextView player2;
     private int turns;
+    private boolean winner;
+    private static boolean firstTurn = true;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+                if (firstTurn) {
+                    firstTurn = false;
+                    return;
+                }
+                winner = data.getBooleanExtra("winner", false);
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,24 +66,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (((Button) view).getText().toString().equals("")) {
             toClicker();
-            boolean winner = getIntent().getBooleanExtra("winner", false);
+            if (firstTurn) {
+                return;
+            }
             if (winner) {
                 ((Button) view).setText("X");
             } else {
                 ((Button) view).setText("O");
             }
-            /*turns++;
-            if (checkBoardWin().equals("X")) {
-                player1Win();
-            } else if (checkBoardWin().equals("O")) {
-                player2Win();
-            } else if (checkBoardWin().equals("draw")) {
+            turns++;
+            if (checkBoardWin()) {
+                if (winner) {
+                    player1Win();
+                } else {
+                    player2Win();
+                }
+            } else if (turns == 9) {
                 draw();
-            }*/
+            }
         }
     }
 
-    private String checkBoardWin() {
+    private boolean checkBoardWin() {
         String[][] board = new String[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -78,30 +98,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (board[i][0].equals(board[i][1])
                 && board[i][0].equals(board[i][2])
                 && !board[i][0].equals("")) {
-                return board[i][0];
+                return true;
             }
         }
         for (int i = 0; i < 3; i++) {
             if (board[0][i].equals(board[1][i])
                     && board[0][i].equals(board[2][i])
                     && !board[0][i].equals("")) {
-                return board[0][i];
+                return true;
             }
         }
         if (board[0][0].equals(board[1][1])
                 && board[0][0].equals(board[2][2])
                 && !board[0][0].equals("")) {
-            return board[0][0];
+            return true;
         }
         if (board[0][2].equals(board[1][1])
                 && board[0][2].equals(board[2][0])
                 && !board[0][2].equals("")) {
-            return board[0][2];
+            return true;
         }
-        if (turns == 9) {
-            return "draw";
-        }
-        return "-";
+        return false;
     }
     private void player1Win() {
         player1Points++;
@@ -132,6 +149,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     private void toClicker() {
         Intent intent = new Intent(this, ClickerActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, 0);
     }
 }
