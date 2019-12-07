@@ -44,15 +44,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     (pressed).setText("O");
                 }
                 turns++;
-                if (checkBoardWin()) {
-                    if (winner) {
-                        player1Win();
-                    } else {
-                        player2Win();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (checkBoardWin()) {
+                            if (winner) {
+                                player1Win();
+                            } else {
+                                player2Win();
+                            }
+                        } else if (turns == 9) {
+                            draw();
+                        }
                     }
-                } else if (turns == 9) {
-                    draw();
-                }
+                }, 1000); // Millisecond 1000 = 1 sec
+
             }
         }
     }
