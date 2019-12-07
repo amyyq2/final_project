@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView player2;
     private int turns;
     private boolean winner;
-    private static boolean firstTurn = true;
     private Button pressed;
 
     @Override
@@ -30,14 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
-                if (firstTurn) {
-                    firstTurn = false;
-                    return;
-                }
                 winner = data.getBooleanExtra("winner", false);
-                if (firstTurn) {
-                    return;
-                }
                 if (winner) {
                     (pressed).setText("X");
                 } else {
@@ -184,7 +176,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 buttons[i][j].setText("");
             }
         }
-        firstTurn = true;
     }
     private void toClicker() {
         Intent intent = new Intent(this, ClickerActivity.class);
