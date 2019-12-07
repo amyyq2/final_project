@@ -20,7 +20,6 @@ public class ClickerActivity extends AppCompatActivity {
     private TextView timer;
     private CountDownTimer countDownTimer;
     private int timeLeftInMilliseconds = 7500; // 7.5 Seconds
-    private boolean win;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

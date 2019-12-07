@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int turns;
     private boolean winner;
     private static boolean firstTurn = true;
+    private Button pressed;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -32,6 +33,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     return;
                 }
                 winner = data.getBooleanExtra("winner", false);
+                if (firstTurn) {
+                    return;
+                }
+                if (winner) {
+                    (pressed).setText("X");
+                } else {
+                    (pressed).setText("O");
+                }
+                turns++;
+                if (checkBoardWin()) {
+                    if (winner) {
+                        player1Win();
+                    } else {
+                        player2Win();
+                    }
+                } else if (turns == 9) {
+                    draw();
+                }
             }
         }
     }
@@ -66,24 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (((Button) view).getText().toString().equals("")) {
             toClicker();
-            if (firstTurn) {
-                return;
-            }
-            if (winner) {
-                ((Button) view).setText("X");
-            } else {
-                ((Button) view).setText("O");
-            }
-            turns++;
-            if (checkBoardWin()) {
-                if (winner) {
-                    player1Win();
-                } else {
-                    player2Win();
-                }
-            } else if (turns == 9) {
-                draw();
-            }
+            pressed = (Button) view;
         }
     }
 
@@ -146,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 buttons[i][j].setText("");
             }
         }
+        firstTurn = true;
     }
     private void toClicker() {
         Intent intent = new Intent(this, ClickerActivity.class);
